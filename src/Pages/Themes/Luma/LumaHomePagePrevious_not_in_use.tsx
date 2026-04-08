@@ -32,7 +32,7 @@ const hotSellers = [
   },
 ];
 
-const ThemesStorePage = () => {
+const LumaHomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -190,4 +190,4 @@ const ThemesStorePage = () => {
   );
 };
 
-export default ThemesStorePage;
+export default LumaHomePage;

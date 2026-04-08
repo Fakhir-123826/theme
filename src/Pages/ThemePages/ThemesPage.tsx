@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";   // ← Import kiya
 
 const themes = [
   {
     id: 1,
-    title: "Modern Dashboard Pro",
+    title: "Luma Themes Store Page",
     category: "Admin Template",
-    image: "https://picsum.photos/id/1015/600/400", // Replace with real theme images
+    image: "https://picsum.photos/id/1015/600/400",
     isPopular: true,
+    path: "/ThemesStorePage"        // ← Yeh path use hoga
   },
   {
     id: 2,
@@ -15,6 +17,7 @@ const themes = [
     category: "Shop Template",
     image: "https://picsum.photos/id/106/600/400",
     isPopular: false,
+    path: "/ecommerce-theme"        // Example path
   },
   {
     id: 3,
@@ -22,6 +25,7 @@ const themes = [
     category: "Marketing",
     image: "https://picsum.photos/id/201/600/400",
     isPopular: true,
+    path: "/saas-landing"
   },
   {
     id: 4,
@@ -49,6 +53,7 @@ const themes = [
 const ThemesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const navigate = useNavigate();   // ← Navigation hook
 
   const categories = ["All", "Admin Template", "Shop Template", "Marketing", "Personal", "Content", "Business"];
 
@@ -57,6 +62,14 @@ const ThemesPage = () => {
     const matchesCategory = selectedCategory === "All" || theme.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const handleApply = (theme: any) => {
+    if (theme.path) {
+      navigate(theme.path);
+    } else {
+      alert(`No path defined for "${theme.title}"`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -121,18 +134,18 @@ const ThemesPage = () => {
                     <h3 className="font-semibold text-xl text-gray-900 line-clamp-1">{theme.title}</h3>
                     <p className="text-sm text-gray-500 mt-1">{theme.category}</p>
                   </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-blue-600"></span>
-                  </div>
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 mt-6">
-                  <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3.5 rounded-2xl transition-all">
+                  <button onClick={() => handleApply(theme)}
+                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3.5 rounded-2xl transition-all">
                     Live Preview
                   </button>
-                  <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 rounded-2xl transition-all">
-                   Apply
+                  <button 
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 rounded-2xl transition-all"
+                  >
+                    Apply
                   </button>
                 </div>
               </div>

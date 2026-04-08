@@ -3,9 +3,17 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import { increment, decrement } from "./app/features/counterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "./app/store";
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  const count2 = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -110,6 +118,13 @@ function App() {
             </li>
           </ul>
         </div>
+
+        <div>
+      <h1>{count2}</h1>
+
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
+    </div>
       </section>
 
       <div className="ticks"></div>

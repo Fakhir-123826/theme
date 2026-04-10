@@ -18,9 +18,9 @@ const menuItems: MenuItem[] = [
   { label: "Dashboard", icon: FaHome, path: "/" },
   { label: "Themes Pages", icon: FaShoppingCart, path: "/ThemesPage" },
   { label: "Luma", icon: FaHandshake, path: "/ThemesStorePage" },
-  { label: "Themes Store Page", icon: FaExchangeAlt, path: "/ThemesStorePage" },
-  { label: "CMS", icon: FaFileAlt, path: "/cms" },
-  { label: "Marketplace", icon: FaShoppingBag, path: "/marketplace" },
+  // { label: "Themes Store Page", icon: FaExchangeAlt, path: "/ThemesStorePage" },
+  // { label: "CMS", icon: FaFileAlt, path: "/cms" },
+  // { label: "Marketplace", icon: FaShoppingBag, path: "/marketplace" },
   {
     label: "Settings",
     icon: FaCog,

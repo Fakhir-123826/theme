@@ -55,12 +55,14 @@ const LumaHomePages = () => {
       {/* Header */}
       <header className="border-b">
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
-              <span className="text-white font-bold text-2xl">M</span>
+          <Link to="/ThemesStorePage">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                <span className="text-white font-bold text-2xl">M</span>
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900 tracking-tight">MADD</h1>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">MADD</h1>
-          </div>
+          </Link>
 
           <div className="flex-1 max-w-2xl mx-12">
             <div className="relative">
@@ -94,8 +96,8 @@ const LumaHomePages = () => {
       </header>
 
       {/* Hero Banner */}
-      <div className="relative h-[520px] bg-cover bg-center" 
-           style={{ backgroundImage: "url('https://picsum.photos/id/1015/1920/600')" }}>
+      <div className="relative h-[520px] bg-cover bg-center"
+        style={{ backgroundImage: "url('https://picsum.photos/id/1015/1920/600')" }}>
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
         <div className="absolute right-20 top-1/2 -translate-y-1/2 bg-white p-10 max-w-md rounded-2xl shadow-xl">
           <p className="text-gray-500">New Premium Collection</p>
@@ -150,8 +152,8 @@ const LumaHomePages = () => {
           {filtered.map((item) => (
             <div key={item.id} className="group">
               <div className="relative overflow-hidden rounded-2xl">
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.title}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />

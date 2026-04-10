@@ -1,4 +1,5 @@
-import { FaStar } from "react-icons/fa";
+import { FaArrowRight, FaStar } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const latestProducts = [
   {
@@ -36,6 +37,7 @@ const latestProducts = [
 ];
 
 const WhatsNewPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white">
       {/* Top Bar */}
@@ -47,12 +49,14 @@ const WhatsNewPage = () => {
       {/* Header */}
       <header className="border-b">
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
-              <span className="text-white font-bold text-3xl">M</span>
+          <Link to="/ThemesStorePage">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                <span className="text-white font-bold text-2xl">M</span>
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900 tracking-tight">MADD</h1>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">MADD</h1>
-          </div>
+          </Link>
 
           <div className="flex-1 max-w-2xl mx-12">
             <div className="relative">
@@ -71,9 +75,9 @@ const WhatsNewPage = () => {
         {/* Navigation Menu */}
         <nav className="bg-gray-100 py-3">
           <div className="max-w-7xl mx-auto px-8 flex gap-8 text-sm font-medium text-gray-700">
-            <a href="#" className="text-blue-600 border-b-2 border-blue-600 pb-1">What's New</a>
+            <Link to="/WhatsNewPage" className="hover:text-black">What's New</Link>
             <a href="#" className="hover:text-black">Admin Themes</a>
-            <a href="#" className="hover:text-black">E-Commerce</a>
+            <Link to="/LumaProductPages" className="hover:text-blue-600">E-Commerce</Link>
             <a href="#" className="hover:text-black">Marketing</a>
             <a href="#" className="hover:text-black">Portfolio</a>
             <a href="#" className="text-red-600 font-semibold">Sale</a>
@@ -124,9 +128,9 @@ const WhatsNewPage = () => {
               </button>
             </div>
             <div className="flex-1">
-              <img 
-                src="https://picsum.photos/id/1015/600/400" 
-                alt="New Collection" 
+              <img
+                src="https://picsum.photos/id/1015/600/400"
+                alt="New Collection"
                 className="rounded-2xl shadow-lg"
               />
             </div>
@@ -188,6 +192,14 @@ const WhatsNewPage = () => {
           </div>
         </div>
       </div>
+
+      <button
+        onClick={() => navigate("/ThemesPage")}
+        className="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold shadow-2xl hover:shadow-3xl flex items-center gap-3 transition-all hover:scale-105 active:scale-95 z-50"
+      >
+        Browse All Themes
+        <FaArrowRight className="text-lg" />
+      </button>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12 mt-20">

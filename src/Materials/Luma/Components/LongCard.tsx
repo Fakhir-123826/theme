@@ -15,7 +15,7 @@ type ProductCardProps = {
   onAddToCart?: (sizeId: number, colorId: number) => void;
   onAddToWishlist?: () => void;
   onAddToCompare?: () => void;
-  onRatingChange?: (rating: number) => void;
+  //onRatingChange?: (rating: number) => void;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -30,18 +30,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onAddToCart,
   onAddToWishlist,
   onAddToCompare,
-  onRatingChange,
+  //onRatingChange,
 }) => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<number | null>(colors[0]?.id || null);
   const [currentRating, setCurrentRating] = useState<number>(rating);
 
-  const handleRating = (rate: number) => {
-    setCurrentRating(rate);
-    if (onRatingChange) {
-      onRatingChange(rate);
-    }
-  };
+  // const handleRating = (rate: number) => {
+  //   setCurrentRating(rate);
+  //   if (onRatingChange) {
+  //     onRatingChange(rate);
+  //   }
+  // };
 
   const handleAddToCart = () => {
     if (selectedSize && selectedColor && onAddToCart) {
@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <li className="list-none w-72 border border-gray-200 rounded-xl p-4 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+    <li className="list-none  w-full max-w-65 border border-gray-200  p-4 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
       <div className="flex flex-col">
         {/* Product Image */}
         <a href={productUrl} className="block mb-4 overflow-hidden rounded-lg">
@@ -76,17 +76,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </strong>
 
           {/* Reviews Summary - Vertical layout */}
-          <div className="flex flex-col gap-1 mb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-3">
             <Rating
-              initialValue={currentRating}
-              size={20}
+              initialValue={rating}
+              size={18}
               allowFraction={true}
-              onClick={handleRating}
-              transition={true}
+              readonly={true}
               SVGclassName="inline-block"
             />
+
             <div className="reviews-actions">
-              <a className="text-gray-500 text-xs no-underline hover:text-blue-600 hover:underline" href={`${productUrl}#reviews`}>
+              <a
+                className="text-gray-500 text-xs no-underline hover:text-blue-600 hover:underline"
+                href={`${productUrl}#reviews`}
+              >
                 {reviewCount} <span>Reviews</span>
               </a>
             </div>
@@ -100,14 +103,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Swatch Options - Sizes */}
           <div className="mb-4">
             <div className="mb-3">
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 {sizes.map((size) => (
                   <div
                     key={size.id}
-                    className={`px-3 py-1.5 border rounded-md cursor-pointer text-sm font-medium transition-all duration-200
-                      ${selectedSize === size.id 
-                        ? "border-blue-600 bg-blue-600 text-white" 
-                        : "border-gray-300 bg-white hover:border-blue-600 hover:bg-blue-50"}`}
+                    className={`flex items-center justify-center h-9 border rounded-md cursor-pointer text-xs font-medium transition-all duration-200
+          ${selectedSize === size.id
+                        ? "border-blue-600 bg-blue-600 text-white"
+                        : "border-gray-300 bg-white hover:border-blue-500 hover:bg-gray-50"}`}
                     onClick={() => setSelectedSize(size.id)}
                     role="option"
                   >
@@ -124,8 +127,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   <div
                     key={color.id}
                     className={`w-8 h-8 rounded-full border-2 cursor-pointer transition-all duration-200 hover:scale-110
-                      ${selectedColor === color.id 
-                        ? "border-blue-600 shadow-[0_0_0_2px_white,0_0_0_4px_#2563eb]" 
+                      ${selectedColor === color.id
+                        ? "border-blue-600 shadow-[0_0_0_2px_white,0_0_0_4px_#2563eb]"
                         : "border-gray-300"}`}
                     onClick={() => setSelectedColor(color.id)}
                     style={{
@@ -142,30 +145,31 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Product Actions */}
           <div className="flex flex-col gap-3">
             <button
-              className="w-full bg-blue-600 text-white border-none py-2.5 px-4 rounded-lg cursor-pointer font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 hover:bg-blue-700 hover:-translate-y-px disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="bg-blue-600 text-white border-none py-2.5 px-4 rounded-lg cursor-pointer font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 hover:bg-blue-700 hover:-translate-y-px disabled:bg-gray-400 disabled:cursor-not-allowed"
               onClick={handleAddToCart}
               disabled={!selectedSize || !selectedColor}
             >
               <FaShoppingCart className="text-sm" />
               <span>Add to Cart</span>
             </button>
-            
-            <div className="flex justify-between gap-2">
+
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
-                className="flex-1 bg-gray-100 text-gray-600 border-none py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200 hover:text-blue-600"
+                className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200 hover:text-blue-600"
                 onClick={onAddToWishlist}
                 title="Add to Wish List"
               >
                 <FaHeart className="text-sm" />
-                <span>Wish List</span>
+                <span className="hidden sm:inline">Wish List</span>
               </button>
+
               <button
-                className="flex-1 bg-gray-100 text-gray-600 border-none py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200 hover:text-blue-600"
+                className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200 hover:text-blue-600"
                 onClick={onAddToCompare}
                 title="Add to Compare"
               >
                 <FaExchangeAlt className="text-sm" />
-                <span>Compare</span>
+                <span className="hidden sm:inline">Compare</span>
               </button>
             </div>
           </div>

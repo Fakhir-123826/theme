@@ -139,7 +139,7 @@ const HotSellersSection = () => {
       </div>
       
       {/* Grid: 1 column on mobile, 2 on sm, 3 on md, 4 on lg, 5 on xl */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
         {products.map((product) => (
           <ProductCard
             key={product.id}

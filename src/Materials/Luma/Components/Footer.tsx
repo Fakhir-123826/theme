@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* ================= BOTTOM BAR ================= */}
-      <div className="bg-[#6d6d6d] py-3 text-center text-sm text-white">
+      <div className="bg-[#6d6d6d] py-3 text-center text-[12px] lg:text-sm text-white">
         Copyright © 2013-present Magento, Inc. All rights reserved.
       </div>
 

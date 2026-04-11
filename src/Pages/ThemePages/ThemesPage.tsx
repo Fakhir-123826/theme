@@ -17,7 +17,7 @@ const themes = [
     category: "Shop Template",
     image: "https://picsum.photos/id/106/600/400",
     isPopular: false,
-    path: "/ecommerce-theme"        // Example path
+    path: "/LumaHome"        // Example path
   },
   {
     id: 3,

@@ -5,6 +5,7 @@ import ThemesPage from "./Pages/ThemePages/ThemesPage";
 import LumaHomePages from "./Pages/Themes/Luma/LumaHomePages";
 import LumaProductPages from "./Pages/Themes/Luma/LumaProductPages";
 import WhatsNewPage from "./Pages/Themes/Luma/WhatsNewPage";
+import HomePage from "./Materials/Luma/Pages/HomePage";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
     {
         path: "/WhatsNewPage",
         element: <WhatsNewPage />
+    },
+       {
+        path: "/LumaHome",
+        element: <HomePage />
     },
     
 

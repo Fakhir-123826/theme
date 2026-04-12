@@ -34,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<number | null>(colors[0]?.id || null);
-  const [currentRating, setCurrentRating] = useState<number>(rating);
+  // const [currentRating, setCurrentRating] = useState<number>(rating);
 
   // const handleRating = (rate: number) => {
   //   setCurrentRating(rate);
@@ -54,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="flex flex-col">
         {/* Product Image */}
         <a href={productUrl} className="block mb-4 overflow-hidden rounded-lg">
-          <span className="block w-full aspect-[240/300]">
+          <span className="block w-full aspect-240/300">
             <img
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               src={image}

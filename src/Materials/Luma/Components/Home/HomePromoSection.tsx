@@ -10,7 +10,7 @@ const HomePromoSection = () => {
 
                 <img
                     src="http://dev.magentonew.local/media/wysiwyg/home/home-main.jpg"
-                    className="w-full h-[400px] md:h-[520px] object-cover"
+                    className="w-full aspect-[16/9] md:h-[520px] object-cover"
                     alt=""
                 />
 
@@ -35,7 +35,7 @@ const HomePromoSection = () => {
                 <Link to="#" className="lg:row-span-3 relative block overflow-hidden">
                     <img
                         src="http://dev.magentonew.local/media/wysiwyg/home/home-pants.jpg"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover aspect-[3/5] md:aspect-auto"
                         alt=""
                     />
 
@@ -75,7 +75,7 @@ const HomePromoSection = () => {
                 <Link to="#" className="lg:col-span-2 lg:row-span-2 relative block overflow-hidden">
                     <img
                         src="http://dev.magentonew.local/media/wysiwyg/home/home-erin.jpg"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover aspect-[4/5] md:aspect-auto"
                         alt=""
                     />
 
@@ -95,7 +95,7 @@ const HomePromoSection = () => {
                 <Link to="#" className="lg:row-span-4 relative block overflow-hidden">
                     <img
                         src="http://dev.magentonew.local/media/wysiwyg/home/home-performance.jpg"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover aspect-[3/6] md:aspect-auto"
                         alt=""
                     />
 
@@ -115,7 +115,7 @@ const HomePromoSection = () => {
                 <Link to="#" className="lg:col-span-3 relative block overflow-hidden">
                     <img
                         src="http://dev.magentonew.local/media/wysiwyg/home/home-eco.jpg"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover aspect-[16/9] md:aspect-auto"
                         alt=""
                     />
 

@@ -28,6 +28,7 @@ const HotSellersSection = () => {
       rating: 4.0,
       reviewCount: 5,
       price: "$22.00",
+      image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//w/t/wt09-white_main_1.jpg",
       sizes: [
         { id: 166, label: "XS" },
         { id: 167, label: "S" },
@@ -47,6 +48,7 @@ const HotSellersSection = () => {
       rating: 4.5,
       reviewCount: 8,
       price: "$22.00",
+      image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//m/t/mt07-gray_main_1.jpg",
       sizes: [
         { id: 166, label: "XS" },
         { id: 167, label: "S" },
@@ -66,6 +68,7 @@ const HotSellersSection = () => {
       rating: 5.0,
       reviewCount: 12,
       price: "$22.00",
+      image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//m/h/mh07-gray_main_2.jpg",
       sizes: [
         { id: 166, label: "XS" },
         { id: 167, label: "S" },
@@ -85,6 +88,7 @@ const HotSellersSection = () => {
       rating: 3.0,
       reviewCount: 2,
       price: "$22.00",
+      image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//m/b/mb02-gray-0.jpg",
       sizes: [
         { id: 166, label: "XS" },
         { id: 167, label: "S" },
@@ -104,6 +108,7 @@ const HotSellersSection = () => {
       rating: 4.2,
       reviewCount: 7,
       price: "$22.00",
+      image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//w/b/wb04-blue-0.jpg",
       sizes: [
         { id: 166, label: "XS" },
         { id: 167, label: "S" },
@@ -137,7 +142,7 @@ const HotSellersSection = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-2">Hot Sellers</h2>
         <p className="text-gray-600">Here is what`s trending on Luma right now</p>
       </div>
-      
+
       {/* Grid: 1 column on mobile, 2 on sm, 3 on md, 4 on lg, 5 on xl */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
         {products.map((product) => (
@@ -146,6 +151,7 @@ const HotSellersSection = () => {
             title={product.title}
             rating={product.rating}
             reviewCount={product.reviewCount}
+            image={product.image}
             price={product.price}
             sizes={product.sizes}
             colors={product.colors}

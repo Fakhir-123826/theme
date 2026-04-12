@@ -6,6 +6,15 @@ import LumaHomePages from "./Pages/Themes/Luma/LumaHomePages";
 import LumaProductPages from "./Pages/Themes/Luma/LumaProductPages";
 import WhatsNewPage from "./Pages/Themes/Luma/WhatsNewPage";
 import HomePage from "./Materials/Luma/Pages/HomePage";
+import LumaLayout from "./Materials/Luma/Components/LumaLayout";
+import WhatsNew from "./Materials/Luma/Pages/WhatsNew";
+import WomenPage from "./Materials/Luma/Pages/WomenPage";
+import MenPage from "./Materials/Luma/Pages/MenPage";
+import GearPage from "./Materials/Luma/Pages/GearPage";
+import TrainingPage from "./Materials/Luma/Pages/TrainingPage";
+import SalePage from "./Materials/Luma/Pages/SalePage";
+import JacketsPage from "./Materials/Luma/Pages/JacketsPage";
+import ProductPage from "./Materials/Luma/Pages/ProductPage";
 
 export const router = createBrowserRouter([
     {
@@ -23,7 +32,7 @@ export const router = createBrowserRouter([
 
         ]
     },
-   
+
     {
         path: "/ThemesStorePage",
         element: <LumaHomePages />
@@ -36,11 +45,51 @@ export const router = createBrowserRouter([
         path: "/WhatsNewPage",
         element: <WhatsNewPage />
     },
-       {
+    {
         path: "/LumaHome",
-        element: <HomePage />
+        element: <LumaLayout />,
+        children: [
+            {
+                index: true,
+                element: <HomePage />
+            },
+            {
+                path: "Whats_new",
+                element: <WhatsNew />
+            },
+            {
+                path: "Women_page",
+                element: <WomenPage />
+            },
+            {
+                path: "Men_page",
+                element: <MenPage />
+            },
+            {
+                path: "Gear_page",
+                element: <GearPage />
+            },
+            {
+                path: "Training_page",
+                element: <TrainingPage />
+            },
+            {
+                path: "Sale_page",
+                element: <SalePage />
+            },
+            {
+                path: "Jackets_page",
+                element: <JacketsPage />
+            },
+            {
+                path: "Product_page",
+                element: <ProductPage />
+            },
+        ]
+
+
     },
-    
+
 
 
 ])

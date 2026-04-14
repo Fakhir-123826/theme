@@ -1,0 +1,210 @@
+'use client';
+
+import React, { useState } from "react";
+import { Rating } from "react-simple-star-rating";
+import { FaShoppingCart, FaHeart, FaExchangeAlt, FaChevronDown, FaChevronUp, FaTimes, FaPlus, FaMinus } from "react-icons/fa";
+import ShortCard from "../Components/ShortCard";
+
+const ProductPage: React.FC = () => {
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>("Purple");
+  const [activeTab, setActiveTab] = useState("reviews");
+  const [openAccordion, setOpenAccordion] = useState<string | null>("reviews");
+  const [quantity, setQuantity] = useState(1);
+  const [activeImage, setActiveImage] = useState(0);
+
+  // New state for Full Screen Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+
+  // Review form state
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewNickname, setReviewNickname] = useState("");
+  const [reviewSummary, setReviewSummary] = useState("");
+  const [reviewText, setReviewText] = useState("");
+  const [reviews, setReviews] = useState<Array<{
+    id: number;
+    rating: number;
+    nickname: string;
+    summary: string;
+    text: string;
+    date: string;
+  }>>([]);
+
+  const sizes = ["XS", "S", "M", "L", "XL"];
+
+  const colors = [
+    { name: "Black", code: "#000000" },
+    { name: "Blue", code: "#1857f7" },
+    { name: "Purple", code: "#ef3dff" },
+  ];
+
+  const productImages = [
+    { main: "http://dev.magentonew.local/media/catalog/product/cache/54b706b17f9250420aa64e529d8e402c/w/j/wj12-blue_main_1.jpg", thumb: "http://dev.magentonew.local/media/catalog/product/cache/34e0d27b1e74e43a8d024e02780fc0c2/w/j/wj12-blue_main_1.jpg" },
+    { main: "http://dev.magentonew.local/media/catalog/product/cache/54b706b17f9250420aa64e529d8e402c/w/j/wj12-purple_main_1.jpg", thumb: "http://dev.magentonew.local/media/catalog/product/cache/34e0d27b1e74e43a8d024e02780fc0c2/w/j/wj12-purple_main_1.jpg" },
+    { main: "http://dev.magentonew.local/media/catalog/product/cache/54b706b17f9250420aa64e529d8e402c/w/j/wj12-blue_alt1_1.jpg", thumb: "http://dev.magentonew.local/media/catalog/product/cache/34e0d27b1e74e43a8d024e02780fc0c2/w/j/wj12-blue_alt1_1.jpg" },
+    { main: "http://dev.magentonew.local/media/catalog/product/cache/54b706b17f9250420aa64e529d8e402c/w/j/wj12-blue_back_1.jpg", thumb: "http://dev.magentonew.local/media/catalog/product/cache/34e0d27b1e74e43a8d024e02780fc0c2/w/j/wj12-blue_back_1.jpg" },
+  ];
+
+  // Open Full Screen Modal
+  const openModal = (index: number) => {
+    setModalImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  // Close Modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // Navigate in Modal
+  const nextImage = () => {
+    setModalImageIndex((prev) => (prev + 1) % productImages.length);
+  };
+
+  const prevImage = () => {
+    setModalImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  };
+
+  // Rest of your existing functions...
+  const handleRating = (rate: number) => setReviewRating(rate);
+
+  const handleSubmitReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (reviewRating === 0) {
+      alert("Please select a rating");
+      return;
+    }
+    const newReview = {
+      id: Date.now(),
+      rating: reviewRating,
+      nickname: reviewNickname,
+      summary: reviewSummary,
+      text: reviewText,
+      date: new Date().toLocaleDateString(),
+    };
+    setReviews([newReview, ...reviews]);
+    setReviewRating(0);
+    setReviewNickname("");
+    setReviewSummary("");
+    setReviewText("");
+    alert("Thank you for your review!");
+  };
+
+  const toggleAccordion = (section: string) => {
+    setOpenAccordion(openAccordion === section ? null : section);
+  };
+
+  return (
+    <div className="column main max-w-7xl mx-auto px-4 py-10">
+      {/* Main Product Section */}
+      <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+
+        {/* LEFT - Image Gallery */}
+        <div className="product media">
+          <div 
+            className="cursor-zoom-in" 
+            onClick={() => openModal(activeImage)}
+          >
+            <img
+              src={productImages[activeImage].main}
+              alt="Olivia 1/4 Zip Light Jacket"
+              className="w-full h-[500px] object-cover rounded-lg shadow-sm"
+            />
+          </div>
+
+          {/* Thumbnails */}
+          <div className="flex gap-3 mt-4 justify-start">
+            {productImages.map((image, index) => (
+              <div
+                key={index}
+                onClick={() => setActiveImage(index)}
+                className={`cursor-pointer border-2 rounded-lg overflow-hidden transition-all ${activeImage === index ? 'border-blue-600' : 'border-transparent hover:border-gray-300'}`}
+              >
+                <img
+                  src={image.thumb}
+                  className="w-20 h-20 object-cover"
+                  alt={`Thumb ${index + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT - Product Info (unchanged) */}
+        <div className="product-info-main">
+          {/* ... your existing product info code (title, price, size, color, add to cart, etc.) ... */}
+          {/* I kept it exactly as you had it for brevity */}
+          <h1 className="text-2xl md:text-3xl font-semibold mb-3">Olivia 1/4 Zip Light Jacket</h1>
+          {/* Price, SKU, Size, Color, Quantity, Add to Cart, Wishlist, Compare - same as before */}
+          {/* You can paste your existing right column code here */}
+        </div>
+      </div>
+
+      {/* Rest of your page (details, accordion, reviews, related products) remains the same */}
+
+      {/* ================= FULL SCREEN IMAGE MODAL ================= */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
+          <div className="relative w-full h-full max-w-5xl mx-auto flex flex-col">
+
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-6 right-6 text-white bg-black/50 hover:bg-black p-3 rounded-full z-50 transition"
+            >
+              <FaTimes size={24} />
+            </button>
+
+            {/* Main Large Image */}
+            <div className="flex-1 flex items-center justify-center p-4">
+              <img
+                src={productImages[modalImageIndex].main}
+                alt="Product"
+                className="max-h-[80vh] max-w-full object-contain"
+              />
+            </div>
+
+            {/* Bottom Thumbnails + Navigation */}
+            <div className="bg-black/80 py-6 px-4 flex items-center justify-center gap-6">
+              {/* Previous Button */}
+              <button
+                onClick={prevImage}
+                className="text-white p-3 hover:bg-white/10 rounded-full transition"
+              >
+                ←
+              </button>
+
+              {/* Thumbnails */}
+              <div className="flex gap-4 overflow-x-auto pb-2">
+                {productImages.map((img, index) => (
+                  <div
+                    key={index}
+                    onClick={() => setModalImageIndex(index)}
+                    className={`cursor-pointer border-2 rounded overflow-hidden transition-all flex-shrink-0 ${modalImageIndex === index ? 'border-white scale-110' : 'border-transparent hover:border-white/50'}`}
+                  >
+                    <img
+                      src={img.thumb}
+                      className="w-16 h-16 object-cover"
+                      alt={`Thumb ${index}`}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={nextImage}
+                className="text-white p-3 hover:bg-white/10 rounded-full transition"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProductPage;

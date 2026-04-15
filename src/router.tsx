@@ -15,6 +15,14 @@ import TrainingPage from "./Materials/Luma/Pages/TrainingPage";
 import SalePage from "./Materials/Luma/Pages/SalePage";
 import JacketsPage from "./Materials/Luma/Pages/JacketsPage";
 import ProductPage from "./Materials/Luma/Pages/ProductPage";
+import CreateAccountPage from "./Materials/Luma/Pages/CreateAccountPage";
+import LoginPage from "./Materials/Luma/Pages/LoginPage";
+import MyAccountPage from "./Materials/Luma/Pages/User/MyAccountPage";
+import MyOrdersPage from "./Materials/Luma/Pages/User/MyOrdersPage";
+import MyWishListPage from "./Materials/Luma/Pages/User/MyWishListPage";
+import AddressBookPage from "./Materials/Luma/Pages/User/AddressBookPage";
+import EditAddressPage from "./Materials/Luma/Pages/User/EditAddressPage";
+import EditAccountInformationPage from "./Materials/Luma/Pages/User/EditAccountInformationPage";
 
 export const router = createBrowserRouter([
     {
@@ -84,6 +92,38 @@ export const router = createBrowserRouter([
             {
                 path: "Product_page",
                 element: <ProductPage />
+            },
+            {
+                path: "CreateAccount",
+                element: <CreateAccountPage />
+            },
+            {
+                path: "LoginPage",
+                element: <LoginPage />
+            },
+            {
+                path: "MyAccountPage",
+                element: <MyAccountPage />
+            },
+            {
+                path: "MyOrdersPage",
+                element: <MyOrdersPage />
+            },
+            {
+                path: "MyWishListPage",
+                element: <MyWishListPage />
+            },
+            {
+                path: "AddressBookPage",
+                element: <AddressBookPage />
+            },
+            {
+                path: "EditAddressPage",
+                element: <EditAddressPage />
+            },
+            {
+                path: "EditAccountInformationPage",
+                element: <EditAccountInformationPage />
             },
         ]
     },

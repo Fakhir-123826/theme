@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../Components/LongCard";
+import ProductCard from "../Components/ProductCard";
 
 const GearPage: React.FC = () => {
   const products = Array.from({ length: 4 }).map((_, i) => ({

@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
                 element: <JacketsPage />
             },
             {
-                path: "Product_page",
+                path: "Product_page/:id",
                 element: <ProductPage />
             },
             {

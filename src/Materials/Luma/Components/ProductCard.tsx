@@ -1,9 +1,13 @@
 // components/ProductCard.tsx
 import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
-import { FaShoppingCart, FaHeart, FaExchangeAlt } from "react-icons/fa";
+import { FaShoppingCart, FaHeart, FaExchangeAlt, FaCheck } from "react-icons/fa";
+import { useAppDispatch } from "../../../app/Store/hooks";
+import { addToCart } from "../../../app/features/cartSlice";
+import { Link } from "react-router-dom";
 
 type ProductCardProps = {
+  id?: string;
   title: string;
   rating: number;
   reviewCount: number;
@@ -12,13 +16,12 @@ type ProductCardProps = {
   colors: { id: number; label: string; code: string }[];
   image?: string;
   productUrl?: string;
-  onAddToCart?: (sizeId: number, colorId: number) => void;
   onAddToWishlist?: () => void;
   onAddToCompare?: () => void;
-  //onRatingChange?: (rating: number) => void;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
+  id = Date.now().toString(),
   title,
   rating,
   reviewCount,
@@ -27,33 +30,64 @@ const ProductCard: React.FC<ProductCardProps> = ({
   colors,
   image = "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//w/s/ws12-blue_main_1.jpg",
   productUrl = "#",
-  onAddToCart,
   onAddToWishlist,
   onAddToCompare,
-  //onRatingChange,
 }) => {
+  const dispatch = useAppDispatch();
+
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<number | null>(colors[0]?.id || null);
-  // const [currentRating, setCurrentRating] = useState<number>(rating);
+  const [isAdding, setIsAdding] = useState(false);
+  const [showAdded, setShowAdded] = useState(false);
 
-  // const handleRating = (rate: number) => {
-  //   setCurrentRating(rate);
-  //   if (onRatingChange) {
-  //     onRatingChange(rate);
-  //   }
-  // };
+  // Get selected size label and color label
+  const selectedSizeLabel = sizes.find(s => s.id === selectedSize)?.label;
+  const selectedColorLabel = colors.find(c => c.id === selectedColor)?.label;
 
   const handleAddToCart = () => {
-    if (selectedSize && selectedColor && onAddToCart) {
-      onAddToCart(selectedSize, selectedColor);
-    }
+    if (!selectedSize || !selectedColor) return;
+
+    setIsAdding(true);
+
+    // Convert price string to number
+    const numericPrice = parseFloat(price.replace('$', ''));
+
+    // Dispatch to Redux store
+    dispatch(addToCart({
+      id: id,
+      name: title,
+      price: numericPrice,
+      quantity: 1,
+      image: image,
+      color: selectedColorLabel,
+      size: selectedSizeLabel,
+      inStock: true,
+    }));
+
+    // Show success feedback
+    setShowAdded(true);
+    setTimeout(() => {
+      setShowAdded(false);
+      setIsAdding(false);
+    }, 2000);
   };
 
   return (
-    <li className="list-none  w-full max-w-65 border border-gray-200  p-4 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+    <li className="list-none w-full max-w-65 border border-gray-200 p-4 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 relative">
+      {/* Success Badge */}
+      {showAdded && (
+        <div className="absolute top-2 right-2 z-10 bg-green-500 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1 animate-in fade-in slide-in-from-top duration-300">
+          <FaCheck className="w-3 h-3" />
+          <span>Added!</span>
+        </div>
+      )}
+
       <div className="flex flex-col">
-        {/* Product Image */}
-        <a href={productUrl} className="block mb-4 overflow-hidden rounded-lg">
+        {/* Product Image - Fixed navigation */}
+        <Link 
+          to={`/LumaHome/Product_page/${id}`} 
+          className="block mb-4 overflow-hidden rounded-lg"
+        >
           <span className="block w-full aspect-240/300">
             <img
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -64,18 +98,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
               alt={title}
             />
           </span>
-        </a>
+        </Link>
 
         {/* Product Details */}
         <div className="flex flex-col">
-          {/* Title */}
+          {/* Title - Fixed navigation */}
           <strong className="text-lg font-semibold mb-2">
-            <a title={title} href={productUrl} className="text-gray-800 no-underline hover:text-blue-600">
+            <Link 
+              to={`/LumaHome/Product_page/${id}`} 
+              className="text-gray-800 no-underline hover:text-blue-600"
+            >
               {title}
-            </a>
+            </Link>
           </strong>
 
-          {/* Reviews Summary - Vertical layout */}
+          {/* Reviews Summary */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-3">
             <Rating
               initialValue={rating}
@@ -86,12 +123,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
             />
 
             <div className="reviews-actions">
-              <a
+              <Link
                 className="text-gray-500 text-xs no-underline hover:text-blue-600 hover:underline"
-                href={`${productUrl}#reviews`}
+                to={`/LumaHome/Product_page/${id}#reviews`}
               >
                 {reviewCount} <span>Reviews</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -145,12 +182,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Product Actions */}
           <div className="flex flex-col gap-3">
             <button
-              className="bg-blue-600 text-white border-none py-2.5 px-4 rounded-lg cursor-pointer font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 hover:bg-blue-700 hover:-translate-y-px disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className={`bg-gradient-to-r from-blue-600 to-purple-600 text-white border-none py-2.5 px-4 rounded-lg cursor-pointer font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 hover:from-blue-700 hover:to-purple-700 hover:-translate-y-px disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed`}
               onClick={handleAddToCart}
-              disabled={!selectedSize || !selectedColor}
+              disabled={!selectedSize || !selectedColor || isAdding}
             >
               <FaShoppingCart className="text-sm" />
-              <span>Add to Cart</span>
+              <span>{isAdding ? 'Adding...' : 'Add to Cart'}</span>
             </button>
 
             <div className="flex flex-col sm:flex-row gap-2">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import ProductCard from "../Components/LongCard";
+import ProductCard from "../Components/ProductCard";
 import FlateCard from "../Components/FlateCard";
 import { BiGridAlt, BiListUl } from "react-icons/bi";
 
@@ -15,6 +15,8 @@ const JacketsPage: React.FC = () => {
         : [...prev, filterName]
     );
   };
+
+
 
   const products = Array.from({ length: 12 }).map((_, i) => ({
     id: i,
@@ -37,6 +39,7 @@ const JacketsPage: React.FC = () => {
 
   // FlateCard product data (single product for list view)
   const flatProduct = {
+    id: "flat-product-1",
     title: "Olivia 1/4 Zip Light Jacket",
     price: "$77.00",
     image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94/w/j/wj12-blue_main_1.jpg",
@@ -141,6 +144,8 @@ const JacketsPage: React.FC = () => {
     }
   };
 
+
+
   const FilterSection: React.FC<{ title: string; options: any[] }> = ({ title, options }) => {
     const isOpen = openFilters.includes(title);
 
@@ -192,6 +197,8 @@ const JacketsPage: React.FC = () => {
       </div>
     );
   };
+
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -305,6 +312,7 @@ const JacketsPage: React.FC = () => {
               <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 {products.map((product) => (
                   <ProductCard
+                    id={product.id.toString()}
                     key={product.id}
                     title={product.title}
                     rating={product.rating}
@@ -337,6 +345,7 @@ const JacketsPage: React.FC = () => {
                 {Array.from({ length: 5 }).map((_, index) => (
                   <FlateCard
                     key={index}
+                    id={(index + 1).toString()}
                     title={flatProduct.title}
                     price={flatProduct.price}
                     image={flatProduct.image}
@@ -348,26 +357,12 @@ const JacketsPage: React.FC = () => {
                       { label: "Blue", code: "#1e88e5" },
                       { label: "Pink", code: "#e91e63" },
                     ]}
-                    onAddToCart={() => console.log('Added to cart')}
-                    onAddToWishlist={() => console.log('Added to wishlist')}
-                    onAddToCompare={() => console.log('Added to compare')}
+                  // Don't pass onAddToCart - let FlateCard use Redux
                   />
                 ))}
               </div>
-
-              {/* Pagination for List View */}
-              <div className="flex justify-end items-center mt-8 text-xs gap-2">
-                <span className="text-gray-500">Show</span>
-                <select className="border rounded px-2 py-1 text-xs bg-white">
-                  <option>5</option>
-                  <option>10</option>
-                  <option>15</option>
-                </select>
-                <span className="text-gray-500">per page</span>
-              </div>
             </>
           )}
-
         </div>
 
       </div>

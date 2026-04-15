@@ -1,4 +1,4 @@
-import ProductCard from "../Components/LongCard";
+import ProductCard from "../Components/ProductCard";
 import Footer from "../Components/Footer";
 
 const WhatsNew = () => {

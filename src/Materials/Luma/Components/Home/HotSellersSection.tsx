@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from '../LongCard';
+import ProductCard from '../ProductCard';
 
 const HotSellersSection = () => {
   const products = [

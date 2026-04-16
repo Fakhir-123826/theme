@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductCard from '../ProductCard';
 
 const HotSellersSection = () => {
+  const navigate = useNavigate();
+
   const products = [
     {
       id: 1,
@@ -9,6 +12,7 @@ const HotSellersSection = () => {
       rating: 3.5,
       reviewCount: 3,
       price: "$22.00",
+      image: "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//w/t/wt09-white_main_1.jpg",
       sizes: [
         { id: 166, label: "XS" },
         { id: 167, label: "S" },
@@ -136,6 +140,11 @@ const HotSellersSection = () => {
     console.log("Add to compare");
   };
 
+  // Handle product click navigation
+  const handleProductClick = (productId: number) => {
+    navigate(`/LumaHome/Product_page/${productId}`);
+  };
+
   return (
     <div className='max-w-7xl mx-auto px-4 py-8'>
       <div className="text-center py-12">
@@ -146,19 +155,24 @@ const HotSellersSection = () => {
       {/* Grid: 1 column on mobile, 2 on sm, 3 on md, 4 on lg, 5 on xl */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
         {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            title={product.title}
-            rating={product.rating}
-            reviewCount={product.reviewCount}
-            image={product.image}
-            price={product.price}
-            sizes={product.sizes}
-            colors={product.colors}
-            onAddToCart={handleAddToCart}
-            onAddToWishlist={handleAddToWishlist}
-            onAddToCompare={handleAddToCompare}
-          />
+          <div 
+            key={product.id} 
+            onClick={() => handleProductClick(product.id)}
+            className="cursor-pointer"
+          >
+            <ProductCard
+              id={product.id.toString()}
+              title={product.title}
+              rating={product.rating}
+              reviewCount={product.reviewCount}
+              image={product.image}
+              price={product.price}
+              sizes={product.sizes}
+              colors={product.colors}
+              // onAddToWishlist={handleAddToWishlist}
+              // onAddToCompare={handleAddToCompare}
+            />
+          </div>
         ))}
       </div>
     </div>

@@ -14,7 +14,7 @@ const TrainingPage: React.FC = () => {
           <div>
             <p className="font-semibold mb-2">Shop By</p>
             <p className="text-xs text-gray-500 mb-1">Category</p>
-            <p className="text-blue-600 cursor-pointer">Video Download 0</p>
+            <p className="text-blue-600 cursor-pointer">Video Download 0 ❌</p>
           </div>
         </aside>
 

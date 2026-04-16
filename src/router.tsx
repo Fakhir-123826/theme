@@ -25,6 +25,7 @@ import EditAddressPage from "./Materials/Luma/Pages/User/EditAddressPage";
 import EditAccountInformationPage from "./Materials/Luma/Pages/User/EditAccountInformationPage";
 import ShippingPage from "./Materials/Luma/Pages/User/ShippingPage";
 import ReviewAndPaymentsPage from "./Materials/Luma/Pages/User/ReviewAndPaymentsPage";
+import CompareProductsPage from "./Materials/Luma/Pages/User/CompareProductsPage";
 
 export const router = createBrowserRouter([
     {
@@ -134,6 +135,10 @@ export const router = createBrowserRouter([
             {
                 path: "ReviewAndPaymentsPage",
                 element: <ReviewAndPaymentsPage />
+            },
+            {
+                path: "CompareProductsPage",
+                element: <CompareProductsPage />
             },
         ]
     },

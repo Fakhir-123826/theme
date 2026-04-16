@@ -1,5 +1,5 @@
 import ProductCard from "../Components/ProductCard";
-import Footer from "../Components/Footer";
+import { Link } from 'react-router-dom';
 
 const WhatsNew = () => {
   const products = Array.from({ length: 5 }).map((_, i) => ({
@@ -40,24 +40,72 @@ const WhatsNew = () => {
           <div>
             <p className="font-semibold mb-3">NEW IN WOMEN'S</p>
             <ul className="space-y-2">
-              <li>Hoodies & Sweatshirts</li>
-              <li>Jackets</li>
-              <li>Tees</li>
-              <li>Bras & Tanks</li>
-              <li>Pants</li>
-              <li>Shorts</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Hoodies & Sweatshirts
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Jackets
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Tees
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Bras & Tanks
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Pants
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Shorts
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="font-semibold mb-3">NEW IN MEN'S</p>
             <ul className="space-y-2">
-              <li>Hoodies & Sweatshirts</li>
-              <li>Jackets</li>
-              <li>Tees</li>
-              <li>Tanks</li>
-              <li>Pants</li>
-              <li>Shorts</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Hoodies & Sweatshirts
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Jackets
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Tees
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Tanks
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Pants
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer">
+                  Shorts
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+ import {Link} from 'react-router-dom';
 
 const SalePage: React.FC = () => {
   return (
@@ -16,31 +17,83 @@ const SalePage: React.FC = () => {
           <div>
             <p className="font-semibold mb-2">WOMEN'S DEALS</p>
             <ul className="space-y-1">
-              <li>Hoodies & Sweatshirts</li>
-              <li>Jackets</li>
-              <li>Tees</li>
-              <li>Bras & Tanks</li>
-              <li>Pants</li>
-              <li>Shorts</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Hoodies & Sweatshirts
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Jackets
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Tees
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Bras & Tanks
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Pants
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Shorts
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="font-semibold mb-2">MEN'S DEALS</p>
             <ul className="space-y-1">
-              <li>Hoodies & Sweatshirts</li>
-              <li>Jackets</li>
-              <li>Tees</li>
-              <li>Pants</li>
-              <li>Shorts</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Hoodies & Sweatshirts
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Jackets
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Tees
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Pants
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Shorts
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="font-semibold mb-2">GEAR DEALS</p>
             <ul className="space-y-1">
-              <li>Bags</li>
-              <li>Fitness Equipment</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Bags
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Fitness Equipment
+                </Link>
+              </li>
             </ul>
           </div>
 

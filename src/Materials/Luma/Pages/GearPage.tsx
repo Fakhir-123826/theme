@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCard from "../Components/ProductCard";
+import {Link} from 'react-router-dom';
 
 const GearPage: React.FC = () => {
   const products = Array.from({ length: 4 }).map((_, i) => ({
@@ -22,24 +23,50 @@ const GearPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
         {/* ================= SIDEBAR ================= */}
+        
+
         <aside className="hidden lg:block text-sm text-gray-700 space-y-8">
 
           <div>
             <p className="font-semibold mb-2">Shop By</p>
             <p className="text-xs text-gray-500 mb-1">Category</p>
             <ul className="space-y-1">
-              <li className="text-blue-600 cursor-pointer">Bags 14</li>
-              <li className="text-blue-600 cursor-pointer">Fitness Equipment 11</li>
-              <li className="text-blue-600 cursor-pointer">Watches 9</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors cursor-pointer block">
+                  Bags 14
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors cursor-pointer block">
+                  Fitness Equipment 11
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors cursor-pointer block">
+                  Watches 9
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="font-semibold mb-2">Categories</p>
             <ul className="space-y-1">
-              <li>Bags</li>
-              <li>Fitness Equipment</li>
-              <li>Watches</li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Bags
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Fitness Equipment
+                </Link>
+              </li>
+              <li>
+                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                  Watches
+                </Link>
+              </li>
             </ul>
           </div>
 

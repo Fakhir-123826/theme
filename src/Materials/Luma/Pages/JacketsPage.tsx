@@ -5,7 +5,7 @@ import FlateCard from "../Components/FlateCard";
 import { BiGridAlt, BiListUl } from "react-icons/bi";
 
 const JacketsPage: React.FC = () => {
-  const [openFilters, setOpenFilters] = useState<string[]>(["STYLE", "SIZE"]);
+  const [openFilters, setOpenFilters] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const toggleFilter = (filterName: string) => {

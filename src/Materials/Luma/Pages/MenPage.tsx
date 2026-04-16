@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCard from "../Components/ProductCard";
+import { Link } from 'react-router-dom';
 
 const MenPage: React.FC = () => {
     const products = Array.from({ length: 4 }).map((_, i) => ({
@@ -30,6 +31,9 @@ const MenPage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
                 {/* ================= SIDEBAR ================= */}
+
+
+
                 <aside className="hidden lg:block text-sm text-gray-700 space-y-8">
 
                     {/* Shop By */}
@@ -37,8 +41,16 @@ const MenPage: React.FC = () => {
                         <p className="font-semibold mb-2">Shop By</p>
                         <p className="text-xs text-gray-500 mb-1">Category</p>
                         <ul className="space-y-1">
-                            <li className="text-blue-600 cursor-pointer">Tops 48</li>
-                            <li className="text-blue-600 cursor-pointer">Bottoms 24</li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors cursor-pointer block">
+                                    Tops 48
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="text-blue-600 hover:text-blue-700 hover:underline transition-colors cursor-pointer block">
+                                    Bottoms 24
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
@@ -46,10 +58,26 @@ const MenPage: React.FC = () => {
                     <div>
                         <p className="font-semibold mb-2">TOPS</p>
                         <ul className="space-y-1">
-                            <li>Hoodies & Sweatshirts</li>
-                            <li>Jackets</li>
-                            <li>Tees</li>
-                            <li>Tanks</li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Hoodies & Sweatshirts
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Jackets
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Tees
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Tanks
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
@@ -57,8 +85,16 @@ const MenPage: React.FC = () => {
                     <div>
                         <p className="font-semibold mb-2">BOTTOMS</p>
                         <ul className="space-y-1">
-                            <li>Pants</li>
-                            <li>Shorts</li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Pants
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Shorts
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 

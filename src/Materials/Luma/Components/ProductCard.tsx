@@ -1,10 +1,10 @@
-// components/ProductCard.tsx
 import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { FaShoppingCart, FaHeart, FaExchangeAlt, FaCheck } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../../app/Store/hooks";
 import { addToCart } from "../../../app/features/cartSlice";
 import { addToWishlist, removeFromWishlist } from '../../../app/features/wishlistSlice';
+import { addToCompare, removeFromCompare } from '../../../app/features/compareSlice';
 import { Link } from "react-router-dom";
 
 type ProductCardProps = {
@@ -17,8 +17,6 @@ type ProductCardProps = {
   colors: { id: number; label: string; code: string }[];
   image?: string;
   productUrl?: string;
-  onAddToWishlist?: () => void;
-  onAddToCompare?: () => void;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -31,8 +29,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   colors,
   image = "http://dev.magentonew.local/media/catalog/product/cache/0ffed21db59b86b4d4dde83841810c94//w/s/ws12-blue_main_1.jpg",
   productUrl = "#",
-  onAddToWishlist,
-  onAddToCompare,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -44,20 +40,77 @@ const ProductCard: React.FC<ProductCardProps> = ({
   // Get selected size label and color label
   const selectedSizeLabel = sizes.find(s => s.id === selectedSize)?.label;
   const selectedColorLabel = colors.find(c => c.id === selectedColor)?.label;
-  
-  // Convert price string to number (move this here so it's available everywhere)
+
+  // Convert price string to number
   const numericPrice = parseFloat(price.replace('$', ''));
-  
+
+  // Wishlist state
   const wishlistItems = useAppSelector((state) => state.wishlist.items);
-  
-  // Check if item is in wishlist
   const isInWishlist = wishlistItems.some(
     item => item.id === id &&
       item.size === selectedSizeLabel &&
       item.color === selectedColorLabel
   );
 
+  // Compare state
+  const compareItems = useAppSelector((state) => state.compare.items);
+  const isInCompare = compareItems.some(item => item.id === id);
+
   // Handle wishlist click
+  // const handleWishlistClick = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+
+  //   if (isInWishlist) {
+  //     dispatch(removeFromWishlist({
+  //       id: id,
+  //       size: selectedSizeLabel,
+  //       color: selectedColorLabel
+  //     }));
+  //   } else {
+  //     dispatch(addToWishlist({
+  //       id: id,
+  //       productId: id,
+  //       name: title,
+  //       price: numericPrice,
+  //       image: image,
+  //       color: selectedColorLabel,
+  //       size: selectedSizeLabel,
+  //       inStock: true,
+  //       addedAt: new Date().toISOString(),
+  //     }));
+  //   }
+  // };
+
+  // // Handle compare click
+  // const handleCompareClick = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+
+  //   if (isInCompare) {
+  //     dispatch(removeFromCompare({ id: id }));
+  //   } else {
+  //     dispatch(addToCompare({
+  //       id: id,
+  //       productId: id,
+  //       name: title,
+  //       price: numericPrice,
+  //       image: image,
+  //       sku: `SKU-${id}`,
+  //       description: `Premium ${title} for all seasons`,
+  //       features: ["Premium quality", "Comfortable fit", "Durable material"],
+  //       rating: rating,
+  //       reviewCount: reviewCount,
+  //       color: selectedColorLabel,
+  //       size: selectedSizeLabel,
+  //       addedAt: new Date().toISOString(),
+  //     }));
+  //   }Product_page
+  // };
+
+  // In ProductCard.tsx, update these functions:
+
+  // Handle wishlist click - fix the null issue
   const handleWishlistClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -65,30 +118,57 @@ const ProductCard: React.FC<ProductCardProps> = ({
     if (isInWishlist) {
       dispatch(removeFromWishlist({
         id: id,
-        size: selectedSizeLabel,
-        color: selectedColorLabel
+        size: selectedSizeLabel || undefined,
+        color: selectedColorLabel || undefined
       }));
     } else {
       dispatch(addToWishlist({
-        id: id,  // This should match the WishlistItem interface
+        id: id,
         productId: id,
         name: title,
         price: numericPrice,
         image: image,
-        color: selectedColorLabel,
-        size: selectedSizeLabel,
+        color: selectedColorLabel || undefined,
+        size: selectedSizeLabel || undefined,
         inStock: true,
         addedAt: new Date().toISOString(),
       }));
     }
   };
 
+  // Handle compare click - fix the null issue
+  const handleCompareClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isInCompare) {
+      dispatch(removeFromCompare({ id: id }));
+    } else {
+      dispatch(addToCompare({
+        id: id,
+        productId: id,
+        name: title,
+        price: numericPrice,
+        image: image,
+        sku: `SKU-${id}`,
+        description: `Premium ${title} for all seasons`,
+        features: ["Premium quality", "Comfortable fit", "Durable material"],
+        rating: rating,
+        reviewCount: reviewCount,
+        color: selectedColorLabel || undefined,
+        size: selectedSizeLabel || undefined,
+        addedAt: new Date().toISOString(),
+      }));
+    }
+  };
+
+
+  // Handle add to cart
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) return;
 
     setIsAdding(true);
 
-    // Dispatch to Redux store
     dispatch(addToCart({
       id: id,
       name: title,
@@ -100,7 +180,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
       inStock: true,
     }));
 
-    // Show success feedback
     setShowAdded(true);
     setTimeout(() => {
       setShowAdded(false);
@@ -119,7 +198,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       )}
 
       <div className="flex flex-col">
-        {/* Product Image - Fixed navigation */}
+        {/* Product Image */}
         <Link
           to={`/LumaHome/Product_page/${id}`}
           className="block mb-4 overflow-hidden rounded-lg"
@@ -138,7 +217,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Product Details */}
         <div className="flex flex-col">
-          {/* Title - Fixed navigation */}
+          {/* Title */}
           <strong className="text-lg font-semibold mb-2">
             <Link
               to={`/LumaHome/Product_page/${id}`}
@@ -227,7 +306,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </button>
 
             <div className="flex flex-col sm:flex-row gap-2">
-              {/* Updated Wishlist Button with Redux */}
+              {/* Wishlist Button */}
               <button
                 className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200"
                 onClick={handleWishlistClick}
@@ -241,13 +320,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 <span className="hidden sm:inline">{isInWishlist ? "Added" : "Wish List"}</span>
               </button>
 
+              {/* Compare Button */}
               <button
-                className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200 hover:text-blue-600"
-                onClick={onAddToCompare}
-                title="Add to Compare"
+                className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200"
+                onClick={handleCompareClick}
+                title={isInCompare ? "Remove from Compare" : "Add to Compare"}
               >
-                <FaExchangeAlt className="text-sm" />
-                <span className="hidden sm:inline">Compare</span>
+                <FaExchangeAlt className={`text-sm ${isInCompare ? 'text-blue-600' : 'text-gray-600'}`} />
+                <span className="hidden sm:inline">{isInCompare ? "Compared" : "Compare"}</span>
               </button>
             </div>
           </div>

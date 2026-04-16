@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import Navbar from '../../Components/Navbar';
-import Footer from '../../Components/Footer';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ShippingPage = () => {
-    const [selectedAddress, setSelectedAddress] = useState(1);
     const [selectedShipping, setSelectedShipping] = useState(10);
 
     const orderItems = [
@@ -126,9 +124,12 @@ const ShippingPage = () => {
 
                             {/* Next Button */}
                             <div className="flex justify-end pt-6">
-                                <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-12 py-4 rounded-2xl transition-all text-lg">
-                                    Next
-                                </button>
+                                <Link to="/LumaHome/ReviewAndPaymentsPage">
+                                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-12 py-4 rounded-2xl transition-all text-lg">
+                                        Next
+                                    </button>
+
+                                </Link>
                             </div>
                         </div>
 

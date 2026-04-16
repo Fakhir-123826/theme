@@ -1,5 +1,5 @@
 import ProductCard from "../Components/ProductCard";
-import Footer from "../Components/Footer";
+import { Link } from 'react-router-dom';
 
 const WomenPage = () => {
     const products = Array.from({ length: 4 }).map((_, i) => ({
@@ -43,25 +43,53 @@ const WomenPage = () => {
                     <div>
                         <p className="font-semibold mb-2">Shop By</p>
                         <p className="text-gray-500 text-xs mb-1">Category</p>
-                        <div className="text-blue-600">Tops 50</div>
-                        <div className="text-blue-600">Bottoms 25</div>
+                        <Link to="/LumaHome/Jackets_page" className="block text-blue-600 hover:text-blue-700 hover:underline transition-colors">
+                            Tops 50
+                        </Link>
+                        <Link to="/LumaHome/Jackets_page" className="block text-blue-600 hover:text-blue-700 hover:underline transition-colors mt-1">
+                            Bottoms 25
+                        </Link>
                     </div>
 
                     <div>
                         <p className="font-semibold mb-2">TOPS</p>
                         <ul className="space-y-1">
-                            <li>Hoodies & Sweatshirts</li>
-                            <li>Jackets</li>
-                            <li>Tees</li>
-                            <li>Bras & Tanks</li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Hoodies & Sweatshirts
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Jackets
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Tees
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Bras & Tanks
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
                     <div>
                         <p className="font-semibold mb-2">BOTTOMS</p>
                         <ul className="space-y-1">
-                            <li>Pants</li>
-                            <li>Shorts</li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Pants
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/LumaHome/Jackets_page" className="hover:text-blue-600 hover:underline transition-colors cursor-pointer block">
+                                    Shorts
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 

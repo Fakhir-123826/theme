@@ -23,6 +23,8 @@ import MyWishListPage from "./Materials/Luma/Pages/User/MyWishListPage";
 import AddressBookPage from "./Materials/Luma/Pages/User/AddressBookPage";
 import EditAddressPage from "./Materials/Luma/Pages/User/EditAddressPage";
 import EditAccountInformationPage from "./Materials/Luma/Pages/User/EditAccountInformationPage";
+import ShippingPage from "./Materials/Luma/Pages/User/ShippingPage";
+import ReviewAndPaymentsPage from "./Materials/Luma/Pages/User/ReviewAndPaymentsPage";
 
 export const router = createBrowserRouter([
     {
@@ -124,6 +126,14 @@ export const router = createBrowserRouter([
             {
                 path: "EditAccountInformationPage",
                 element: <EditAccountInformationPage />
+            },
+            {
+                path: "ShippingPage",
+                element: <ShippingPage />
+            },
+            {
+                path: "ReviewAndPaymentsPage",
+                element: <ReviewAndPaymentsPage />
             },
         ]
     },

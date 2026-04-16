@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { FaShoppingCart, FaHeart, FaExchangeAlt, FaCheck } from "react-icons/fa";
-import { useAppDispatch } from "../../../app/Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/Store/hooks";
 import { addToCart } from "../../../app/features/cartSlice";
+import { addToWishlist, removeFromWishlist } from '../../../app/features/wishlistSlice';
 import { Link } from "react-router-dom";
 
 type ProductCardProps = {
@@ -43,14 +44,49 @@ const ProductCard: React.FC<ProductCardProps> = ({
   // Get selected size label and color label
   const selectedSizeLabel = sizes.find(s => s.id === selectedSize)?.label;
   const selectedColorLabel = colors.find(c => c.id === selectedColor)?.label;
+  
+  // Convert price string to number (move this here so it's available everywhere)
+  const numericPrice = parseFloat(price.replace('$', ''));
+  
+  const wishlistItems = useAppSelector((state) => state.wishlist.items);
+  
+  // Check if item is in wishlist
+  const isInWishlist = wishlistItems.some(
+    item => item.id === id &&
+      item.size === selectedSizeLabel &&
+      item.color === selectedColorLabel
+  );
+
+  // Handle wishlist click
+  const handleWishlistClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isInWishlist) {
+      dispatch(removeFromWishlist({
+        id: id,
+        size: selectedSizeLabel,
+        color: selectedColorLabel
+      }));
+    } else {
+      dispatch(addToWishlist({
+        id: id,  // This should match the WishlistItem interface
+        productId: id,
+        name: title,
+        price: numericPrice,
+        image: image,
+        color: selectedColorLabel,
+        size: selectedSizeLabel,
+        inStock: true,
+        addedAt: new Date().toISOString(),
+      }));
+    }
+  };
 
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) return;
 
     setIsAdding(true);
-
-    // Convert price string to number
-    const numericPrice = parseFloat(price.replace('$', ''));
 
     // Dispatch to Redux store
     dispatch(addToCart({
@@ -84,8 +120,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
       <div className="flex flex-col">
         {/* Product Image - Fixed navigation */}
-        <Link 
-          to={`/LumaHome/Product_page/${id}`} 
+        <Link
+          to={`/LumaHome/Product_page/${id}`}
           className="block mb-4 overflow-hidden rounded-lg"
         >
           <span className="block w-full aspect-240/300">
@@ -104,8 +140,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className="flex flex-col">
           {/* Title - Fixed navigation */}
           <strong className="text-lg font-semibold mb-2">
-            <Link 
-              to={`/LumaHome/Product_page/${id}`} 
+            <Link
+              to={`/LumaHome/Product_page/${id}`}
               className="text-gray-800 no-underline hover:text-blue-600"
             >
               {title}
@@ -191,13 +227,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </button>
 
             <div className="flex flex-col sm:flex-row gap-2">
+              {/* Updated Wishlist Button with Redux */}
               <button
-                className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200 hover:text-blue-600"
-                onClick={onAddToWishlist}
-                title="Add to Wish List"
+                className="w-full sm:flex-1 bg-gray-100 text-gray-600 py-2 px-3 rounded-lg cursor-pointer text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 hover:bg-gray-200"
+                onClick={handleWishlistClick}
+                title={isInWishlist ? "Remove from Wish List" : "Add to Wish List"}
               >
-                <FaHeart className="text-sm" />
-                <span className="hidden sm:inline">Wish List</span>
+                {isInWishlist ? (
+                  <FaHeart className="text-red-500 text-sm" />
+                ) : (
+                  <FaHeart className="text-gray-600 text-sm hover:text-red-500" />
+                )}
+                <span className="hidden sm:inline">{isInWishlist ? "Added" : "Wish List"}</span>
               </button>
 
               <button

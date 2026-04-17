@@ -5,6 +5,8 @@ import logo from '../../../assets/logo.svg';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/Store/hooks';
 import { removeFromCart, updateQuantity, clearCart } from '../../../app/features/cartSlice';
+import showConfirm from '../Components/CustomConfirm';
+import { showAlert } from '../utils/alert';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,9 +96,23 @@ const Navbar = () => {
     }));
   };
 
-  const handleClearCart = () => {
-    if (window.confirm('Are you sure you want to clear your cart?')) {
+  // const handleClearCart = () => {
+  //   if (window.confirm('Are you sure you want to clear your cart?')) {
+  //     dispatch(clearCart());
+  //   }
+  // };
+  const handleClearCart = async () => {
+    const confirmed = await showConfirm({
+      title: 'Clear Shopping Cart',
+      message: 'Are you sure you want to clear your cart?',
+      confirmText: 'Yes, Clear All',
+      cancelText: 'No, Keep Items',
+      type: 'warning',  // warning = yellow/orange color
+    });
+
+    if (confirmed) {
       dispatch(clearCart());
+      showAlert('Cart cleared successfully!', 'success');
     }
   };
 

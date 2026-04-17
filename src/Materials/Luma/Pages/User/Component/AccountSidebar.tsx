@@ -22,6 +22,8 @@ import { useAppDispatch, useAppSelector } from '../../../../../app/Store/hooks';
 import { removeFromWishlist, clearWishlist } from '../../../../../app/features/wishlistSlice';
 import { addToCart } from '../../../../../app/features/cartSlice';
 import { removeFromCompare, clearCompare } from '../../../../../app/features/compareSlice';
+import { showConfirm } from '../../../utils/confirm';
+import { showAlert } from '../../../utils/alert';
 
 interface AccountSidebarProps {
   activeTab?: string;
@@ -41,7 +43,7 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({
 
   // Get wishlist items from Redux store
   const wishlistItems = useAppSelector((state) => state.wishlist.items);
-  
+
   // Get compare items from Redux store (from your compare slice)
   const compareItems = useAppSelector((state) => state.compare.items);
 
@@ -58,21 +60,55 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({
     { label: 'Newsletter Subscriptions ❌', icon: FiMail, route: '/LumaHome/NewsletterSubscriptions' },
   ];
 
+  // // Clear all wishlist items
+  // const clearAllWishlist = () => {
+  //   if (window.confirm('Are you sure you want to clear your entire wishlist?')) {
+  //     dispatch(clearWishlist());
+  //     console.log('🧹 Wishlist cleared');
+  //   }
+  // };
+
+  // // Clear all compare items
+  // const clearAllCompare = () => {
+  //   if (window.confirm('Are you sure you want to clear all items from compare?')) {
+  //     dispatch(clearCompare());
+  //     console.log('🧹 Compare list cleared');
+  //   }
+  // };
+
   // Clear all wishlist items
-  const clearAllWishlist = () => {
-    if (window.confirm('Are you sure you want to clear your entire wishlist?')) {
+  const clearAllWishlist = async () => {
+    const confirmed = await showConfirm({
+      title: 'Clear Wishlist',
+      message: 'Are you sure you want to clear your entire wishlist?',
+      confirmText: 'Yes, Clear All',
+      cancelText: 'Cancel',
+      type: 'warning',
+    });
+
+    if (confirmed) {
       dispatch(clearWishlist());
-      console.log('🧹 Wishlist cleared');
+      showAlert('Wishlist cleared!', 'success');
     }
   };
 
   // Clear all compare items
-  const clearAllCompare = () => {
-    if (window.confirm('Are you sure you want to clear all items from compare?')) {
+  const clearAllCompare = async () => {
+    const confirmed = await showConfirm({
+      title: 'Clear Compare List',
+      message: 'Are you sure you want to clear all items from compare?',
+      confirmText: 'Yes, Clear All',
+      cancelText: 'Cancel',
+      type: 'warning',
+    });
+
+    if (confirmed) {
       dispatch(clearCompare());
-      console.log('🧹 Compare list cleared');
+      showAlert('Compare list cleared!', 'success');
     }
   };
+
+
 
   // Handle remove from wishlist
   const handleRemoveFromWishlist = (item: any, e: React.MouseEvent) => {
@@ -241,7 +277,7 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover"
-                      onError={(e) => { 
+                      onError={(e) => {
                         e.currentTarget.src = `https://via.placeholder.com/32/2563eb/ffffff?text=${encodeURIComponent(item.name.substring(0, 2))}`;
                       }}
                     />
@@ -265,11 +301,10 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({
         <div className="flex gap-3 mt-6 pt-4 border-t border-gray-100">
           <Link
             to="/LumaHome/CompareProductsPage"
-            className={`flex-1 px-4 py-2 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-sm text-center ${
-              compareItems.length >= 2
+            className={`flex-1 px-4 py-2 text-white text-sm font-medium rounded-xl transition-all duration-200 shadow-sm text-center ${compareItems.length >= 2
                 ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
                 : 'bg-gray-400 cursor-not-allowed pointer-events-none'
-            }`}
+              }`}
           >
             Compare ({compareItems.length} items)
           </Link>

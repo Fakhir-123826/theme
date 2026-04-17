@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/Store/hooks";
 import { addToCart } from "../../../app/features/cartSlice";
 import { addToWishlist, removeFromWishlist } from "../../../app/features/wishlistSlice";
 import { addToCompare, removeFromCompare } from "../../../app/features/compareSlice";
-
+import { showAlert } from '../../../Materials/Luma/utils/alert';
 // Product type definition
 interface Product {
   id: string;
@@ -538,7 +538,7 @@ const ProductPage: React.FC = () => {
   // Handle Add to Cart
   const handleAddToCart = () => {
     if (!product || !selectedSize || !selectedColor) {
-      alert("Please select both size and color before adding to cart");
+      showAlert("Please select both size and color before adding to cart");
       return;
     }
 
@@ -610,7 +610,7 @@ const ProductPage: React.FC = () => {
     e.preventDefault();
 
     if (reviewRating === 0) {
-      alert("Please select a rating");
+      showAlert("Please select a rating");
       return;
     }
 
@@ -631,7 +631,7 @@ const ProductPage: React.FC = () => {
     setReviewSummary("");
     setReviewText("");
 
-    alert("Thank you for your review!");
+    showAlert("Thank you for your review!");
   };
 
   const toggleAccordion = (section: string) => {

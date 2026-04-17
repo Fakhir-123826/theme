@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../app/Store/hooks';
 import { removeFromWishlist, clearWishlist } from '../../../../app/features/wishlistSlice';
 import { addToCart } from '../../../../app/features/cartSlice';
-import Navbar from '../../Components/Navbar';
-import Footer from '../../Components/Footer';
 import AccountSidebar from './Component/AccountSidebar';
 import { FaTrash, FaShoppingCart, FaHeart } from 'react-icons/fa';
-import { FiShare2, FiRefreshCw } from 'react-icons/fi';
+import { FiShare2 } from 'react-icons/fi';
+import { showAlert } from '../../utils/alert';
+import { showConfirm } from '../../utils/confirm';
 
 const MyWishListPage = () => {
     const dispatch = useAppDispatch();
@@ -23,14 +23,35 @@ const MyWishListPage = () => {
         "Ingrid Running Jacket"
     ]);
 
+    // // Handle remove single item
+    // const handleRemoveItem = (item: any) => {
+    //     if (window.confirm(`Remove "${item.name}" from your wishlist?`)) {
+    //         dispatch(removeFromWishlist({
+    //             id: item.id,
+    //             size: item.size,
+    //             color: item.color
+    //         }));
+    //     }
+    // };
+
+
     // Handle remove single item
-    const handleRemoveItem = (item: any) => {
-        if (window.confirm(`Remove "${item.name}" from your wishlist?`)) {
+    const handleRemoveItem = async (item: any) => {
+        const confirmed = await showConfirm({
+            title: 'Remove from Wishlist',
+            message: `Remove "${item.name}" from your wishlist?`,
+            confirmText: 'Remove',
+            cancelText: 'Cancel',
+            type: 'error',
+        });
+
+        if (confirmed) {
             dispatch(removeFromWishlist({
                 id: item.id,
                 size: item.size,
                 color: item.color
             }));
+            showAlert(`${item.name} removed from wishlist`, 'info');
         }
     };
 
@@ -65,15 +86,31 @@ const MyWishListPage = () => {
             }));
         });
 
-        alert(`Added ${wishlistItems.length} item(s) to cart!`);
+        showAlert(`Added ${wishlistItems.length} item(s) to cart!`);
     };
 
     // Handle clear all wishlist
-    const handleClearAll = () => {
-        if (window.confirm('Are you sure you want to clear your entire wishlist?')) {
+    // const handleClearAll = () => {
+    //     if (window.confirm('Are you sure you want to clear your entire wishlist?')) {
+    //         dispatch(clearWishlist());
+    //     }
+    // };
+
+    const handleClearAll = async () => {
+        const confirmed = await showConfirm({
+            title: 'Clear Wishlist',
+            message: 'Are you sure you want to clear your entire wishlist?',
+            confirmText: 'Yes, Clear All',
+            cancelText: 'Cancel',
+            type: 'warning',
+        });
+
+        if (confirmed) {
             dispatch(clearWishlist());
+            showAlert('Wishlist cleared!', 'success');
         }
     };
+
 
     // Handle image error
     const handleImageError = (itemId: string) => {
@@ -89,7 +126,7 @@ const MyWishListPage = () => {
     const handleShare = () => {
         const url = window.location.href;
         navigator.clipboard.writeText(url);
-        alert('Wishlist link copied to clipboard!');
+        showAlert('Wishlist link copied to clipboard!');
     };
 
     return (
@@ -134,7 +171,7 @@ const MyWishListPage = () => {
                             <AccountSidebar
                                 activeTab="My Wish List"
                                 onTabChange={() => { }}
-                                compareItems={compareItems}
+                            // compareItems={compareItems}
                             />
                         </div>
 

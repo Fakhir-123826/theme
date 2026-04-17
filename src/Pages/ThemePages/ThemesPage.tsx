@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";   // ← Import kiya
+import { showAlert } from "../../Materials/Luma/utils/alert";
 
 const themes = [
   {
@@ -67,7 +68,7 @@ const ThemesPage = () => {
     if (theme.path) {
       navigate(theme.path);
     } else {
-      alert(`No path defined for "${theme.title}"`);
+      showAlert(`No path defined for "${theme.title}"`);
     }
   };
 

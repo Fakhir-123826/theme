@@ -15,6 +15,8 @@ import {
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { MdCompare } from 'react-icons/md';  // 👈 Fixed: Use MdCompare instead of FiGitCompare
 import AccountSidebar from './Component/AccountSidebar';
+import { showConfirm } from '../../utils/confirm';
+import { showAlert } from '../../utils/alert';
 
 const CompareProductsPage = () => {
     const dispatch = useAppDispatch();
@@ -28,12 +30,26 @@ const CompareProductsPage = () => {
         dispatch(removeFromCompare({ id }));
     };
 
-    const handleClearAll = () => {
-        if (window.confirm('Are you sure you want to clear all items from compare?')) {
+    // const handleClearAll = () => {
+    //     if (window.confirm('Are you sure you want to clear all items from compare?')) {
+    //         dispatch(clearCompare());
+    //     }
+    // };
+
+    const handleClearAll = async () => {
+        const confirmed = await showConfirm({
+            title: 'Clear Compare List',
+            message: `Are you sure you want to clear all ${compareItems.length} items from compare?`,
+            confirmText: 'Yes, Clear All',
+            cancelText: 'Cancel',
+            type: 'warning',
+        });
+
+        if (confirmed) {
             dispatch(clearCompare());
+            showAlert('Compare list cleared successfully!', 'success');
         }
     };
-
     const handleAddToCart = (item: any) => {
         dispatch(addToCart({
             id: item.productId || item.id,

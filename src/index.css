@@ -1,31 +1,56 @@
 @import "tailwindcss";
 
-/* C:\Users\Development\Desktop\Themes\src\Materials\Luma\Pages\ProductPage.tsx */
-/* this is for this page */
-/* Custom scrollbar for thumbnails */
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+/* Thumbnail scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
-  height: 4px;
+    height: 4px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
 }
 
+/* Sidebar custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
 
-@keyframes slide-up {
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ========================================
+   TOAST/ALERT ANIMATIONS
+   ======================================== */
+
+/* Slide Down - For entering */
+@keyframes slide-down {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -33,6 +58,194 @@
     }
 }
 
+/* Slide Up - For exiting */
+@keyframes slide-up {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 0.3s ease-out forwards;
+}
+
 .animate-slide-up {
-    animation: slide-up 0.3s ease-out;
+    animation: slide-up 0.3s ease-out forwards;
+}
+
+/* ========================================
+   MODAL/CONFIRM ANIMATIONS
+   ======================================== */
+
+/* Scale Up - For entering (without translate to avoid conflict) */
+@keyframes scale-up {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scale Down - For exiting (without translate to avoid conflict) */
+@keyframes scale-down {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+.animate-scale-up {
+    animation: scale-up 0.3s ease-out forwards;
+}
+
+.animate-scale-down {
+    animation: scale-down 0.3s ease-out forwards;
+}
+
+/* ========================================
+   BACKDROP ANIMATIONS
+   ======================================== */
+
+/* Fade In - For backdrop entering */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fade Out - For backdrop exiting */
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-fade-out {
+    animation: fade-out 0.3s ease-out forwards;
+}
+
+/* ========================================
+   LOADING SKELETON ANIMATION
+   ======================================== */
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* ========================================
+   PULSE ANIMATION
+   ======================================== */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* ========================================
+   BOUNCE ANIMATION
+   ======================================== */
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.animate-bounce {
+    animation: bounce 0.5s ease-out;
+}
+
+/* ========================================
+   SPIN ANIMATION (for loading)
+   ======================================== */
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow {
+    transition: box-shadow 0.2s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+    }
 }
